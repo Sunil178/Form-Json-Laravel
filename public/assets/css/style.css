@@ -131,6 +131,17 @@ span[data-role="key"] {
     margin: 0px;
 }
 
+.edit_box select {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-family: cursive, sans-serif;
+    outline: 0;
+    color: #0800ff;
+    border: none;
+    padding: 4px;
+    border-radius: 9px;
+}
+
 .collapse_box {
     font-size: 6pt;
     color: #999;

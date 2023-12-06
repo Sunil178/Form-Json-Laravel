@@ -4,7 +4,7 @@ $(function(){
            });
            
            $('#json_editor').html('');
-    json_editor('json_editor', '{"greeting":"haro"}');
+    json_editor('json_editor', '{"key":"text"}');
 
     // add the jquery editing magic
     apply_editlets();
@@ -18,10 +18,10 @@ $(function(){
 // stuff for the modal ws window
 function display_ws_modal() {
     var id = '#dialog';
-    //transition effect     
-    $('#mask').fadeIn(500);    
-    $('#mask').fadeTo("slow",0.8);  
-    
+    //transition effect
+    $('#mask').fadeIn(500);
+    $('#mask').fadeTo("slow",0.8);
+
     //Get the window height and width
     var winH = $(window).height();
     var winW = $(window).width();
@@ -87,36 +87,12 @@ var easy_save_value = function(value, settings) {
 }
 var save_value = function(value, settings) { 
     console.log(this); console.log(value); // console.log(settings);
-
     if ($(this).data('role') == 'value') {
-        if (value == "null") {
-            $(this).attr("data-type", "null");
-            $(this).data('type','null');
-            $(this).text(value);
-            $(this).unbind('click');
-        } else if (value == "true" || value == "false") {
-            $(this).attr("data-type", "boolean");
-            $(this).data('type','boolean');
-            $(this).text(value);
-            $(this).unbind();
-            $(this).editable(save_value,{ cssclass : 'edit_box', height:'20px', width:'100px', data : "{'true':'true','false':'false'}", type : 'select', onblur : 'submit' });
-        } else {
-            var num = parseFloat(value);
-            console.log(num);
-            if (isNaN(num)) {
-                $(this).attr("data-type", "string");
-                $(this).data('type','string');
-                $(this).text(value);
-                $(this).unbind();
-                $(this).editable(save_value, { cssclass : 'edit_box', height:'20px', width:'50px'});
-            } else {
-                $(this).attr("data-type", "number");
-                $(this).data('type','number');
-                $(this).text(num);
-                $(this).unbind();
-                $(this).editable(save_value, { cssclass : 'edit_box', height:'20px', width:'150px'});
-            }
-        }
+        $(this).attr("data-type", "string");
+        $(this).data('type','string');
+        $(this).text(value);
+        $(this).unbind();
+        $(this).editable(save_value, { cssclass: 'edit_box', height: '20px', width: '50px'});
     } else {
         $(this).text(value);
     }
@@ -153,14 +129,6 @@ function parse_node(node) {
         return newNode;
     } else if (type == 'string') {
         return node.html();
-    } else if (type == 'number') {
-        var parsedNum = parseFloat(node.html());
-        if(isNaN(parsedNum)) return 0;
-        return parsedNum;
-    } else if (type == 'boolean') {
-        return (node.html() == "true") ;
-    } else if (type == null || type == 'null' ) {
-        return null;
     } else {
         return "(Unknown Type:" + type + " )";
     }
@@ -194,11 +162,11 @@ function apply_editlets() {
     $('div[data-type="object"]').append(add_more_box);
     $('div[data-type="array"]').append(add_more_box);
     
-    $('div.inline_add_box a').click(function(e){
+    $('div.inline_add_box a').click(function(e) {
         var target = $(e.target);
         var task = target.data('task');
         var add_box = target.parents(".inline_add_box");
-        var collection = add_box.parent();				
+        var collection = add_box.parent();
         var type = collection.data('type');
 
         // TODO this code is a partial duplicate of code in make_node fix it!
@@ -236,16 +204,28 @@ function apply_editlets() {
     );
 
     // make the fields editable in place
-    $('span[data-role="key"]').editable(easy_save_value,{ cssclass : 'edit_box', height:'20px', width:'100px'});
-    $('[data-type="string"]').editable(save_value, { cssclass : 'edit_box', height:'20px', width:'150px'});
-    $('[data-type="number"]').editable(save_value, { cssclass : 'edit_box', height:'20px', width:'50px'});
-    $('[data-type="null"]').editable(save_value, { cssclass : 'edit_box', height:'20px', width:'150px'});
-    $('[data-type="boolean"]').editable(save_value,{ cssclass : 'edit_box', height:'20px', width:'100px', data : "{'true':'true','false':'false'}", type : 'select', onblur : 'submit' });
+    $('span[data-role="key"]').editable(easy_save_value, { cssclass: 'edit_box', height: '20px', width: '100px'});
+    $('[data-type="string"]').editable(save_value, {
+        data: '{"text":"text","textarea":"textarea","number":"number"}',
+        type: 'select',
+        cssclass: 'edit_box',
+        height: '20px',
+        width: '150px'
+    });
     
     // make the right click menus
     setup_menu();
 
 }
+
+$(document).on('change', '.edit_box select', function (event) {
+    console.log(event.currentTarget.value);
+    let pre_value = $(this).parent().parent();
+    pre_value.attr("data-type", "string");
+    pre_value.data('type','string');
+    pre_value.text(event.currentTarget.value);
+});
+
 // parse the text area into the the workarea, setup the event handlers
 function load_from_box() {
     $('#json_editor').html('');
@@ -289,11 +269,5 @@ function make_node(node_in) {
         return container;
     } else if (type === "[object String]") {
         return $('<pre data-role="value" data-type="string">').html(node_in);
-    } else if (type === "[object Number]") {
-        return $('<pre data-role="value" data-type="number">').html(node_in);
-    } else if (type === "[object global]" || type === "[object Null]") {
-        return $('<pre data-role="value" data-type="null">').html('null');
-    } else if (type === "[object Boolean]") {
-        return $('<pre data-role="value" data-type="boolean">').html(node_in.toString());
     }
 }
