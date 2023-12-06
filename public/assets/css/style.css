@@ -260,14 +260,19 @@ div.inline_add_box {
     float: right;
     position: absolute;
     border: 1px solid;
-    min-height: 4px;
-    max-height: 16px;
+    min-height: 16px;
+    max-height: 26px;
     overflow: hidden;
+}
+
+span.add_box_icon {
+    font-size: 20px;
+    font-weight: bolder;
 }
 
 div.inline_add_box a {
     color: #7aa;
-    font-size: 10px;
+    font-size: 15px;
     cursor: pointer;
     text-decoration: none;
 }

@@ -1,7 +1,7 @@
 $(function(){
     $(document).bind("contextmenu",function(e){
               return false;
-           }); 
+           });
            
            $('#json_editor').html('');
     json_editor('json_editor', '{"greeting":"haro"}');
@@ -190,7 +190,7 @@ function apply_editlets() {
     });
     
     // add the "new" buttons
-    var add_more_box = $('<div class="inline_add_box"><div class="add_box_content">add: <a data-task="add_value" href="#">text</a> | <a data-task="add_array" href="#">array</a> | <a data-task="add_object" href="#">object</a></div></div>');
+    var add_more_box = $('<div class="inline_add_box"><span class="add_box_icon">+</span><div class="add_box_content">add: <a data-task="add_value" href="#">text</a> | <a data-task="add_array" href="#">array</a> | <a data-task="add_object" href="#">object</a></div></div>');
     $('div[data-type="object"]').append(add_more_box);
     $('div[data-type="array"]').append(add_more_box);
     
@@ -226,10 +226,12 @@ function apply_editlets() {
     
     $(".inline_add_box").hover(
         function () {
-            $(this).children().show(100);
+            $(this).children().show();
+            $(this).find('.add_box_icon').hide();
         },
         function () {
-            $(this).children().hide(200);
+            $(this).children().hide();
+            $(this).find('.add_box_icon').show();
         }
     );
 

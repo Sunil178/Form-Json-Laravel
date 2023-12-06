@@ -15,7 +15,8 @@ use App\Http\Controllers\PageController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect()->route('pages.create');
 });
 
 Route::get('/pages/create', [PageController::class, 'create'])->name('pages.create');
