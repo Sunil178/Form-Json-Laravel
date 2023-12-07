@@ -20,5 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get('/pages/create', [PageController::class, 'create'])->name('pages.create');
-Route::post('/pages', [PageController::class, 'store']);
+Route::post('/pages', [PageController::class, 'store'])->name('pages.store');
 Route::get('/pages/{page}', [PageController::class, 'show'])->name('pages.show');

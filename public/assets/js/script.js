@@ -241,3 +241,7 @@ function make_node(node_in) {
         return $('<pre data-role="value" data-type="string">').html(node_in);
     }
 }
+
+/* $('#schema_btn').on('click', function (event) {
+    extract_json('json_editor');
+}); */
