@@ -21,8 +21,7 @@
 		<a href="#" onclick="javascript:load_from_box(); " title="import into workspace">&gt;&gt;</a><br/>
 		<a href="#" onclick="javascript:extract_json('json_editor');"  title="export json">&lt;0</a><br/>
 		<a href="#" onclick="javascript:extract_json('json_editor', 2); "  title="export json with 2 space indent">&lt;2</a><br/>
-		<a href="#" onclick="javascript:extract_json('json_editor', '\t'); "  title="export json with tab indent">&lt;\t</a><br/>
-		<a href="#" onclick="javascript:save_ws('json_editor'); " title="save as a mock web service">ws</a>
+		<a href="#" onclick="javascript:extract_json('json_editor', '\t'); "  title="export json with tab indent">&lt;\t</a>
 
 	</div>
 	<div id="editarea" class="rounded">

@@ -67,6 +67,10 @@ div {
     background: #fff;
 }
 
+#json_editor * {
+    font-size: large;
+}
+
 #json_editor span {
     margin: 2px;
     padding: 1px;
@@ -111,6 +115,11 @@ pre {
 
 div[data-role="value"] {
     margin-left: 20px;
+}
+
+div[data-role="prop"] {
+    margin-top: 13px !important;
+    margin-bottom: 13px !important;
 }
 
 div[data-role="prop"],
