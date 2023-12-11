@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->string('page_name');
-            $table->integer('page_no');
-            $table->json('page_schema');
-            $table->json('page_content')->nullable();
+            $table->string('name');
+            $table->integer('number');
+            $table->json('schema');
+            $table->json('content')->nullable();
             $table->timestamps();
         });
     }

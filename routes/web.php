@@ -19,6 +19,10 @@ Route::get('/', function () {
     return redirect()->route('pages.create');
 });
 
-Route::get('/pages/create', [PageController::class, 'create'])->name('pages.create');
-Route::post('/pages', [PageController::class, 'store'])->name('pages.store');
-Route::get('/pages/{page}', [PageController::class, 'show'])->name('pages.show');
+Route::get('pages', [PageController::class, 'index'])->name('pages.index');
+Route::post('pages', [PageController::class, 'store'])->name('pages.store');
+Route::get('pages/create', [PageController::class, 'create'])->name('pages.create');
+Route::get('pages/schema/{page}', [PageController::class, 'schemaEdit'])->name('pages.schema_edit');
+Route::put('pages/schema/{page}', [PageController::class, 'schemaUpdate'])->name('pages.schema_update');
+Route::get('pages/content/{page}', [PageController::class, 'contentEdit'])->name('pages.content_edit');
+Route::put('pages/content/{page}', [PageController::class, 'contentUpdate'])->name('pages.content_update');
