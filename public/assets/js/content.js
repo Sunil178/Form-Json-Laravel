@@ -173,8 +173,8 @@ function apply_editlets() {
     );
 
     // make the fields editable in place
-    $('[data-type="string"]').editable(save_value, { cssclass: 'edit_box', height: '20px', width: '150px', placeholder: 'null' });
-    $('[data-value="textarea"]').editable(save_value, { type: 'textarea', cssclass: 'edit_box', height: '20px', width: '150px', placeholder: 'null' });
+    $('[data-type="string"][data-value!="textarea"]').editable(save_value, { cssclass: 'edit_box', height: '20px', width: '150px', placeholder: 'null' });
+    $('[data-value="textarea"]').editable(save_value, { type: 'textarea', cssclass: 'edit_box', height: '20px', width: '150px', onblur: 'submit', placeholder: 'null' });
     
     // make the right click menus
     setup_menu();
@@ -255,7 +255,7 @@ $(document).on('focus', '[data-value="number"] form input', function (event) {
     }
 });
 
-$(document).on('focus', '[data-role="value"] form input', function (event) {
+$(document).on('focus', '[data-role="value"] form input,[data-role="value"] form textarea', function (event) {
     let value = $(this).val();
     if (value == 'text' || value == 'textarea' || value == 'number') {
         $(this).val('');
