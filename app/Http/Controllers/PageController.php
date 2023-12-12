@@ -9,7 +9,7 @@ class PageController extends Controller
 {
     public function index()
     {
-        $pages = Page::all();
+        $pages = Page::orderByDesc('created_at')->get();
         return view('pages.index', compact('pages'));
     }
 
@@ -24,7 +24,6 @@ class PageController extends Controller
             'name' => 'required|string',
             'number' => 'required|integer',
             'schema' => 'required|json',
-            'content' => 'nullable|json',
         ]);
 
         Page::create($data);
@@ -43,7 +42,6 @@ class PageController extends Controller
             'name' => 'required|string',
             'number' => 'required|integer',
             'schema' => 'required|json',
-            'content' => 'nullable|json',
         ]);
 
         $page->update($data);

@@ -1,22 +1,24 @@
 // Validation - start
 
 $('#schema_btn').on('click', function (event) {
-    let page_schema = $('input[name=schema]');
-    let number = $('input[name=number]');
-    let name = $('input[name=name]');
-
-    page_schema.val(glean_json('json_editor', 2));
-    if (!number.val()) {
-        number.parent().next().text('Page no. is required').show();
-    }
-    if (isNaN(number.val())) {
-        number.parent().next().text('Page no. is not a number').show();
-    }
-    if (!name.val()) {
-        name.parent().next().text('Page name is required').show();
-    }
-    if (number.val() && name.val() && page_schema.val()) {
-        $('#page_form').submit();
+    if (confirm("Modifying the schema will erase the page content") == true) {
+        let page_schema = $('input[name=schema]');
+        let number = $('input[name=number]');
+        let name = $('input[name=name]');
+    
+        page_schema.val(glean_json('json_editor'));
+        if (!number.val()) {
+            number.parent().next().text('Page no. is required').show();
+        }
+        if (isNaN(number.val())) {
+            number.parent().next().text('Page no. is not a number').show();
+        }
+        if (!name.val()) {
+            name.parent().next().text('Page name is required').show();
+        }
+        if (number.val() && name.val() && page_schema.val()) {
+            $('#page_form').submit();
+        }
     }
 });
 

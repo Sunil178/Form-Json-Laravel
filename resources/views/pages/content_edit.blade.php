@@ -26,7 +26,7 @@
 	<form action="{{ route('pages.content_update', $page->id) }}" method="POST" id="page_form">
 		@csrf
 		@method('PUT')
-		<input type="hidden" name="content" id="json-schema" autocomplete="off" value="{{ $page->schema }}">
+		<input type="hidden" name="content" id="json-schema" autocomplete="off" value="{{ $page->content ?? $page->schema }}">
 		<button class="btn" id="content_btn" type="button">Submit</button>
 	</form>
 @endsection

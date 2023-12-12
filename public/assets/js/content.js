@@ -130,9 +130,9 @@ function apply_editlets() {
     });
     
     // add the "new" buttons
-    var add_more_box = $('<div class="inline_add_box"><span class="add_box_icon">+</span><div class="add_box_content">add: <a data-task="add_value" href="#">text</a> | <a data-task="add_array" href="#">array</a> | <a data-task="add_object" href="#">object</a></div></div>');
-    $('div[data-type="object"]').append(add_more_box);
-    $('div[data-type="array"]').append(add_more_box);
+    var add_more_box = $('<div class="inline_add_box"><span class="add_box_icon">+</span><div class="add_box_content">add: <a data-task="add_value" href="#">text</a> | <a data-task="add_object" href="#">object</a></div></div>');
+    $('div[data-role="arrayitem"] div[data-type="object"]').append(add_more_box);
+    $('div[data-role="arrayitem"] div[data-type="array"]').append(add_more_box);
     
     $('div.inline_add_box a').click(function(e) {
         var target = $(e.target);
@@ -149,13 +149,10 @@ function apply_editlets() {
         }
         
         if (task == 'add_object') {
-            var json = '{"id":"1"}';
-            newObj.append(make_node(JSON.parse(json)));
-        } else if (task == 'add_array') {
-            var json = '["item1"]';
+            var json = '{"key":"text"}';
             newObj.append(make_node(JSON.parse(json)));
         } else {
-            newObj.append($('<pre data-role="value" data-type="string">').html("value"));
+            newObj.append($('<pre data-role="value" data-type="string">').html("text"));
         }
         newObj.hide();
         add_box.before(newObj);
@@ -176,8 +173,8 @@ function apply_editlets() {
     );
 
     // make the fields editable in place
-    $('[data-type="string"]').editable(save_value, { cssclass: 'edit_box', height: '20px', width: '150px' });
-    $('[data-value="textarea"]').editable(save_value, { type: 'textarea', cssclass: 'edit_box', height: '20px', width: '150px' });
+    $('[data-type="string"]').editable(save_value, { cssclass: 'edit_box', height: '20px', width: '150px', placeholder: 'null' });
+    $('[data-value="textarea"]').editable(save_value, { type: 'textarea', cssclass: 'edit_box', height: '20px', width: '150px', placeholder: 'null' });
     
     // make the right click menus
     setup_menu();
@@ -256,4 +253,17 @@ $(document).on('focus', '[data-value="number"] form input', function (event) {
     if (!number_value.replace(/[^0-9]/g, '')) {
         $(this).val('');
     }
+});
+
+$(document).on('focus', '[data-role="value"] form input', function (event) {
+    let value = $(this).val();
+    if (value == 'text' || value == 'textarea' || value == 'number') {
+        $(this).val('');
+    }
+});
+
+$('#content_btn').on('click', function (event) {
+    let page_content = $('input[name=content]');
+    page_content.val(glean_json('json_editor'));
+    $('#page_form').submit();
 });

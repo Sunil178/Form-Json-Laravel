@@ -176,13 +176,14 @@ function apply_editlets() {
     );
 
     // make the fields editable in place
-    $('span[data-role="key"]').editable(easy_save_value, { cssclass: 'edit_box', height: '20px', width: '100px' });
+    $('span[data-role="key"]').editable(easy_save_value, { cssclass: 'edit_box', height: '20px', width: '100px', placeholder: 'null' });
     $('[data-type="string"]').editable(save_value, {
         data: '{"text":"text","textarea":"textarea","number":"number"}',
         type: 'select',
         cssclass: 'edit_box',
         height: '20px',
         width: '150px',
+        placeholder: 'null',
         onblur: 'submit'
     });
 
