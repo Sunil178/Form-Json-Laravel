@@ -1,7 +1,7 @@
 // Validation - start
 
 $('#schema_btn').on('click', function (event) {
-    if (confirm("Modifying the schema will erase the page content") == true) {
+    if (!$('input[name=_method][value=PUT]').length || confirm("Modifying the schema will erase the page content") == true) {
         let page_schema = $('input[name=schema]');
         let number = $('input[name=number]');
         let name = $('input[name=name]');

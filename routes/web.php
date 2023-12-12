@@ -15,12 +15,12 @@ use App\Http\Controllers\PageController;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
-    return redirect()->route('pages.create');
+    return redirect()->route('pages.index');
 });
 
 Route::get('pages', [PageController::class, 'index'])->name('pages.index');
 Route::post('pages', [PageController::class, 'store'])->name('pages.store');
+Route::delete('pages/{page}', [PageController::class, 'destroy'])->name('pages.destroy');
 Route::get('pages/create', [PageController::class, 'create'])->name('pages.create');
 Route::get('pages/schema/{page}', [PageController::class, 'schemaEdit'])->name('pages.schema_edit');
 Route::put('pages/schema/{page}', [PageController::class, 'schemaUpdate'])->name('pages.schema_update');

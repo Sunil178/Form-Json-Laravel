@@ -30,10 +30,23 @@
                 <td>
                     <a href="{{ route('pages.schema_edit', $page->id) }}" class="btn btn-green"><span>&#9998;</span>Schema</a>
                     <a href="{{ route('pages.content_edit', $page->id) }}" class="btn btn-blue"><span>&#x270e;</span>Content</a>
+                    <form action="{{ route('pages.destroy', $page->id) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-blue delete-btn" type="button"><span>&#128465;</span>Delete</button>
+                    </form>
                 </td>
             </tr>
         @endforeach
     </tbody>
 </table>
+
+<script>
+    $('.delete-btn').on('click', function (event) {
+        if (confirm("Are you sure to delete this page?") == true) {
+            $(this).closest('form').submit();
+        }
+    });
+</script>
 
 @endsection
